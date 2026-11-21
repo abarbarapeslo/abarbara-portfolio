@@ -15,10 +15,10 @@ import { AnimatePresence, motion } from "framer-motion";
  *   - "off" → never asked again; the bottom-right toggle is always there.
  *   - no answer (card ignored, auto-hides) → asked again next visit.
  *
- * Audio: a calm mix of Mixkit "Gentle sea wave" (#1199), "Distant sea humming"
- * (#1193) and "Birds in the spring forest" (#1224), low-passed to remove hiss,
- * 90s seamless loop. Mixkit Free License —
- * free for commercial use, no attribution. Loudness-normalised to -24 LUFS.
+ * Audio: Mixkit "Sea waves with birds loop" (#1208) — a close, realistic
+ * shoreline recording. Harsh highs softened (-5 dB shelf above 5.5 kHz),
+ * 75s seamless loop. Mixkit Free License — free for commercial use, no
+ * attribution. Loudness-normalised to -20 LUFS.
  */
 const storageKey = "ambientSound";
 const targetVolume = 0.55;
