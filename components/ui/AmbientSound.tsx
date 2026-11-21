@@ -21,7 +21,18 @@ import { AnimatePresence, motion } from "framer-motion";
  * attribution. Loudness-normalised to -20 LUFS.
  */
 const storageKey = "ambientSound";
-const targetVolume = 0.55;
+
+/**
+ * Two layers play together: the shoreline recording and a soft melody
+ * underneath it. Each has its own level and fade-in so the melody drifts in
+ * after the waves rather than starting on top of them.
+ * Melody: Mixkit "Indian Meditations" (#21, Mixkit Stock Music Free License),
+ * loudness-normalised to -22 LUFS with soft fades at both ends of the loop.
+ */
+const layers = [
+  { src: "/hero/seashore.mp3", volume: 0.55, fadeMs: 900 },
+  { src: "/hero/melody.mp3", volume: 0.32, fadeMs: 2500 },
+] as const;
 const promptDelayMs = 600;
 const promptAutoHideMs = 10000;
 
@@ -45,42 +56,49 @@ function writePref(on: boolean) {
 }
 
 export default function AmbientSound() {
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const audioRefs = useRef<(HTMLAudioElement | null)[]>([]);
   const fadeRef = useRef<number>(0);
   const [playing, setPlaying] = useState(false);
   const [askOpen, setAskOpen] = useState(false);
 
-  const fadeTo = (to: number, onDone?: () => void) => {
-    const audio = audioRef.current;
-    if (!audio) return;
+  /** Fade every layer to `on ? its volume : 0`, each over its own duration. */
+  const fadeAll = (on: boolean, onDone?: () => void) => {
     cancelAnimationFrame(fadeRef.current);
-    const from = audio.volume;
     const begin = performance.now();
+    const from = layers.map((_, i) => audioRefs.current[i]?.volume ?? 0);
+    const longest = Math.max(...layers.map((l) => (on ? l.fadeMs : 900)));
     const step = (now: number) => {
-      const t = Math.min(1, (now - begin) / 900);
-      audio.volume = from + (to - from) * t;
-      if (t < 1) fadeRef.current = requestAnimationFrame(step);
+      const elapsed = now - begin;
+      layers.forEach((layer, i) => {
+        const audio = audioRefs.current[i];
+        if (!audio) return;
+        const t = Math.min(1, elapsed / (on ? layer.fadeMs : 900));
+        audio.volume = from[i] + ((on ? layer.volume : 0) - from[i]) * t;
+      });
+      if (elapsed < longest) fadeRef.current = requestAnimationFrame(step);
       else onDone?.();
     };
     fadeRef.current = requestAnimationFrame(step);
   };
 
   const start = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    audio.volume = 0;
-    audio
-      .play()
+    const audios = audioRefs.current.filter((a): a is HTMLAudioElement => !!a);
+    if (!audios.length) return;
+    audios.forEach((a) => (a.volume = 0));
+    Promise.all(audios.map((a) => a.play()))
       .then(() => {
         setPlaying(true);
-        fadeTo(targetVolume);
+        fadeAll(true);
       })
-      .catch(() => setPlaying(false));
+      .catch(() => {
+        audios.forEach((a) => a.pause());
+        setPlaying(false);
+      });
   };
 
   const stop = () => {
     setPlaying(false);
-    fadeTo(0, () => audioRef.current?.pause());
+    fadeAll(false, () => audioRefs.current.forEach((a) => a?.pause()));
   };
 
   const toggle = () => {
@@ -146,7 +164,17 @@ export default function AmbientSound() {
 
   return (
     <>
-      <audio ref={audioRef} src="/hero/seashore.mp3" loop preload="none" />
+      {layers.map((layer, i) => (
+        <audio
+          key={layer.src}
+          ref={(el) => {
+            audioRefs.current[i] = el;
+          }}
+          src={layer.src}
+          loop
+          preload="none"
+        />
+      ))}
 
       <AnimatePresence>
         {askOpen && (

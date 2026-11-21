@@ -42,3 +42,4 @@ next-env.d.ts
 
 # local Claude Code harness settings, not project config
 .claude/
+.sound-previews/
