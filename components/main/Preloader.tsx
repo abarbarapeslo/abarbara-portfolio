@@ -73,6 +73,10 @@ export default function Preloader() {
         // keeps it mounted), so cleanup never runs and the lock would be
         // permanent — the page could never scroll.
         document.documentElement.style.overflow = prevOverflow;
+        // Tell CustomCursor the loader is gone — it stays hidden until the
+        // first pointer move after this moment.
+        document.documentElement.setAttribute("data-preloader-done", "");
+        window.dispatchEvent(new Event("preloaderdone"));
         setDone(true);
       });
     }, root);

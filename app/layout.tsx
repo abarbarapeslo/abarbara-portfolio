@@ -8,6 +8,7 @@ import Navbar from "@/components/main/Navbar";
 import Preloader from "@/components/main/Preloader";
 import CustomCursor from "@/components/main/CustomCursor";
 import ScrollProgressBar from "@/components/ui/ScrollProgressBar";
+import AmbientSound from "@/components/ui/AmbientSound";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vishwamshah.vercel.app"),
@@ -65,8 +66,9 @@ export default function RootLayout({
         <CustomCursor />
         <AuroraBackground />
         <Navbar />
+        <AmbientSound />
         <div className="relative z-10">{children}</div>
-        <Toaster theme="light" position="bottom-right" richColors closeButton />
+        <Toaster theme="light" position="bottom-right" offset={84} richColors closeButton />
         <SpeedInsights />
       </body>
     </html>

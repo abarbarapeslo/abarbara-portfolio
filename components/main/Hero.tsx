@@ -10,6 +10,7 @@ import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { HiArrowDown, HiOutlineEnvelope } from "react-icons/hi2";
 import ShimmerButton from "@/components/ui/ShimmerButton";
 import Typewriter from "@/components/ui/Typewriter";
+import { VideoBackground } from "@/components/ui/VideoBackground";
 
 /**
  * Hero — full-bleed WebGL "Waves" shader behind the headline.
@@ -32,6 +33,15 @@ const ShaderBackground = dynamic(
   () => import("@/components/ui/adisyon-shader").then((m) => m.ShaderBackground),
   { ssr: false, loading: () => <div className="h-full w-full bg-[#EFE2C4]" /> }
 );
+
+/**
+ * Which background the hero renders. The real-footage clips replaced the
+ * shader as the default; the shader is kept intact and is one word away.
+ *   "beach"  — top-down turquoise surf on white sand (default)
+ *   "water"  — clear shallow water with sunlight caustics
+ *   "shader" — the original WebGL beach-wave shader (cursor-reactive)
+ */
+const heroBackground = "beach" as "beach" | "water" | "shader";
 
 // Only the two figures that already existed in this codebase are kept here.
 // "40 hrs manual work automated" and "IEEE accepted research" were removed as
@@ -124,9 +134,13 @@ const Hero = () => {
       id="home"
       className="relative flex min-h-screen w-full items-center overflow-hidden bg-[#EFE2C4]"
     >
-      {/* full-bleed shader — swirls under the cursor */}
+      {/* full-bleed background — real footage, or the original shader */}
       <div className="absolute inset-0 z-0">
-        <ShaderBackground className="h-full w-full" />
+        {heroBackground === "shader" ? (
+          <ShaderBackground className="h-full w-full" />
+        ) : (
+          <VideoBackground clip={heroBackground} className="h-full w-full" />
+        )}
       </div>
 
       {/* left-weighted scrim so the copy reads over the wave crests */}

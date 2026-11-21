@@ -29,9 +29,29 @@ const CustomCursor = () => {
     let hovering = false;
     let raf = 0;
 
+    // Hidden while the preloader runs, and after it until the visitor actually
+    // moves the pointer — then it appears right under the pointer instead of
+    // sliding in from the centre of the screen.
+    let loaderDone = document.documentElement.hasAttribute("data-preloader-done");
+    let visible = false;
+    const setOpacity = (v: string) => {
+      dot.style.opacity = v;
+      ring.style.opacity = v;
+    };
+    setOpacity("0");
+    const onLoaderDone = () => {
+      loaderDone = true;
+    };
+
     const onMove = (e: PointerEvent) => {
       mx = e.clientX;
       my = e.clientY;
+      if (loaderDone && !visible) {
+        visible = true;
+        rx = mx;
+        ry = my;
+        setOpacity("1");
+      }
       dot.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-50%, -50%)`;
       const target = e.target as HTMLElement | null;
       const interactive = !!target?.closest(
@@ -44,13 +64,9 @@ const CustomCursor = () => {
     };
     const onDown = () => (ring.dataset.down = "true");
     const onUp = () => (ring.dataset.down = "false");
-    const onLeave = () => {
-      dot.style.opacity = "0";
-      ring.style.opacity = "0";
-    };
+    const onLeave = () => setOpacity("0");
     const onEnter = () => {
-      dot.style.opacity = "1";
-      ring.style.opacity = "1";
+      if (visible) setOpacity("1");
     };
 
     const loop = () => {
@@ -61,6 +77,7 @@ const CustomCursor = () => {
     };
     loop();
 
+    window.addEventListener("preloaderdone", onLoaderDone);
     window.addEventListener("pointermove", onMove, { passive: true });
     window.addEventListener("pointerdown", onDown);
     window.addEventListener("pointerup", onUp);
@@ -69,6 +86,7 @@ const CustomCursor = () => {
 
     return () => {
       cancelAnimationFrame(raf);
+      window.removeEventListener("preloaderdone", onLoaderDone);
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerdown", onDown);
       window.removeEventListener("pointerup", onUp);
