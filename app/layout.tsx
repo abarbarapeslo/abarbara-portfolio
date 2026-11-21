@@ -40,14 +40,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Vishwam Shah | AI Engineer & Full-Stack Engineer",
     description:
-      "AI engineer and full-stack developer building production AI products.",
+      "AI engineer and full-stack engineer building production AI products.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: "Vishwam Shah | AI Engineer & Full-Stack Engineer",
-    description: "AI engineer and full-stack developer building production AI products.",
+    description: "AI engineer and full-stack engineer building production AI products.",
   },
 };
 
