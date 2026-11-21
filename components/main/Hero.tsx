@@ -43,6 +43,9 @@ const ShaderBackground = dynamic(
  */
 const heroBackground = "beach" as "beach" | "water" | "shader";
 
+/** Titles the gradient line types, holds, erases and cycles through. */
+const roles = ["AI Engineer", "Full-Stack Engineer", "Entrepreneur"];
+
 // Only the two figures that already existed in this codebase are kept here.
 // "40 hrs manual work automated" and "IEEE accepted research" were removed as
 // requested: credentials and vague automation claims do not convert clients.
@@ -166,22 +169,24 @@ const Hero = () => {
             variants={item}
             className="font-display text-[2.5rem] font-bold leading-[1.04] tracking-tight text-zinc-900 sm:text-6xl lg:text-7xl"
           >
-            <Typewriter
-              speed={70}
-              startDelay={500}
-              lines={[
-                { text: "Vishwam Shah" },
-                {
-                  text: "AI Engineer",
-                  className:
-                    "mt-2 bg-linear-to-r from-aurora-violet via-aurora-blue to-aurora-teal bg-clip-text text-transparent",
-                },
-                {
-                  text: "& Full-Stack Developer.",
-                  className: "mt-1 text-2xl font-medium text-zinc-400 sm:text-3xl",
-                },
-              ]}
-            />
+            {/* screen readers get the full title once, not every keystroke */}
+            <span className="sr-only">{`Vishwam Shah, ${roles.join(", ")}`}</span>
+            <span aria-hidden>
+              <Typewriter
+                speed={70}
+                startDelay={500}
+                holdMs={2000}
+                lines={[
+                  { text: "Vishwam Shah" },
+                  {
+                    text: roles[0],
+                    words: roles,
+                    className:
+                      "mt-2 whitespace-nowrap text-[2rem] sm:text-6xl lg:text-7xl bg-linear-to-r from-aurora-violet via-aurora-blue to-aurora-teal bg-clip-text text-transparent",
+                  },
+                ]}
+              />
+            </span>
           </motion.h1>
 
           <motion.p

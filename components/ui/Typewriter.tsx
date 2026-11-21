@@ -3,7 +3,12 @@
 import React, { useEffect, useState } from "react";
 import { cn } from "@/utils/cn";
 
-export type TypeLine = { text: string; className?: string };
+/**
+ * A line either types `text` once, or — when `words` is given — rotates
+ * forever: type a word, hold, backspace, type the next. A rotating line
+ * should be the LAST line (lines after it would never get their turn).
+ */
+export type TypeLine = { text: string; className?: string; words?: string[] };
 
 interface Props {
   lines: TypeLine[];
@@ -13,12 +18,16 @@ interface Props {
   startDelay?: number;
   /** ms pause between lines */
   linePause?: number;
+  /** rotating lines: ms a finished word stays on screen */
+  holdMs?: number;
+  /** rotating lines: ms per character while backspacing */
+  deleteSpeed?: number;
   caretClassName?: string;
   className?: string;
 }
 
 /**
- * Multi-line typewriter. Reserves the full layout box up-front (invisible
+ * Multi-line typewriter. Reserves each line's layout box up-front (invisible
  * remainder) so nothing below jumps while it types. Pure React + setTimeout.
  */
 const Typewriter = ({
@@ -26,12 +35,22 @@ const Typewriter = ({
   speed = 60,
   startDelay = 350,
   linePause = 320,
+  holdMs = 1800,
+  deleteSpeed = 35,
   caretClassName,
   className,
 }: Props) => {
   const [counts, setCounts] = useState<number[]>(() => lines.map(() => 0));
   const [active, setActive] = useState(0);
   const [started, setStarted] = useState(false);
+  // rotation state for the active line (only used when it has `words`)
+  const [wordIndex, setWordIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  const textOf = (i: number) => {
+    const words = lines[i].words;
+    return words?.length ? words[i === active ? wordIndex % words.length : 0] : lines[i].text;
+  };
 
   useEffect(() => {
     const t = setTimeout(() => setStarted(true), startDelay);
@@ -40,31 +59,44 @@ const Typewriter = ({
 
   useEffect(() => {
     if (!started || active >= lines.length) return;
-    const full = lines[active].text;
+    const words = lines[active].words;
+    const rotating = !!words && words.length > 1;
+    const full = textOf(active);
     const n = counts[active];
+    const setN = (v: number) =>
+      setCounts((prev) => {
+        const c = [...prev];
+        c[active] = v;
+        return c;
+      });
 
-    if (n < full.length) {
-      const t = setTimeout(() => {
-        setCounts((prev) => {
-          const c = [...prev];
-          c[active] = n + 1;
-          return c;
-        });
-      }, speed);
-      return () => clearTimeout(t);
+    let t: ReturnType<typeof setTimeout>;
+    if (!deleting && n < full.length) {
+      t = setTimeout(() => setN(n + 1), speed);
+    } else if (!rotating) {
+      t = setTimeout(() => setActive((a) => a + 1), linePause);
+    } else if (!deleting) {
+      t = setTimeout(() => setDeleting(true), holdMs);
+    } else if (n > 0) {
+      t = setTimeout(() => setN(n - 1), deleteSpeed);
+    } else {
+      t = setTimeout(() => {
+        setDeleting(false);
+        setWordIndex((w) => w + 1);
+      }, linePause);
     }
-
-    const t = setTimeout(() => setActive((a) => a + 1), linePause);
     return () => clearTimeout(t);
-  }, [started, active, counts, lines, speed, linePause]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [started, active, counts, lines, speed, linePause, holdMs, deleteSpeed, deleting, wordIndex]);
 
   const caretLine = Math.min(active, lines.length - 1);
 
   return (
     <span className={className}>
       {lines.map((line, i) => {
-        const shown = line.text.slice(0, counts[i]);
-        const rest = line.text.slice(counts[i]);
+        const full = textOf(i);
+        const shown = full.slice(0, counts[i]);
+        const rest = full.slice(counts[i]);
         return (
           <span key={i} className={cn("block", line.className)}>
             <span>{shown}</span>
@@ -79,7 +111,7 @@ const Typewriter = ({
               />
             )}
             <span className="opacity-0" aria-hidden>
-              {rest || " "}
+              {rest || " "}
             </span>
           </span>
         );
