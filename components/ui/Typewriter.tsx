@@ -8,7 +8,16 @@ import { cn } from "@/utils/cn";
  * forever: type a word, hold, backspace, type the next. A rotating line
  * should be the LAST line (lines after it would never get their turn).
  */
-export type TypeLine = { text: string; className?: string; words?: string[] };
+export type TypeLine = {
+  text: string;
+  /** classes for the line box (spacing, size, nowrap) */
+  className?: string;
+  /** classes for the typed text only. Put gradient / bg-clip-text styles
+   *  HERE, not in className: background-clip:text paints through every
+   *  glyph in the element, including the hidden not-yet-typed remainder. */
+  textClassName?: string;
+  words?: string[];
+};
 
 interface Props {
   lines: TypeLine[];
@@ -99,7 +108,7 @@ const Typewriter = ({
         const rest = full.slice(counts[i]);
         return (
           <span key={i} className={cn("block", line.className)}>
-            <span>{shown}</span>
+            <span className={line.textClassName}>{shown}</span>
             {i === caretLine && (
               <span
                 aria-hidden

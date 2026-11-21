@@ -11,6 +11,7 @@ import { HiArrowDown, HiOutlineEnvelope } from "react-icons/hi2";
 import ShimmerButton from "@/components/ui/ShimmerButton";
 import Typewriter from "@/components/ui/Typewriter";
 import { VideoBackground } from "@/components/ui/VideoBackground";
+import AgentTerminal from "@/components/ui/AgentTerminal";
 
 /**
  * Hero — full-bleed WebGL "Waves" shader behind the headline.
@@ -157,7 +158,7 @@ const Hero = () => {
 
       <div
         ref={contentRef}
-        className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-24 pt-32 md:pt-28"
+        className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-24 pt-32 md:pt-28 xl:flex xl:items-center xl:justify-between xl:gap-8"
       >
         <motion.div
           variants={container}
@@ -181,8 +182,9 @@ const Hero = () => {
                   {
                     text: roles[0],
                     words: roles,
-                    className:
-                      "mt-2 whitespace-nowrap text-[2rem] sm:text-6xl lg:text-7xl bg-linear-to-r from-aurora-violet via-aurora-blue to-aurora-teal bg-clip-text text-transparent",
+                    className: "mt-2 whitespace-nowrap text-[2rem] sm:text-6xl lg:text-7xl",
+                    textClassName:
+                      "bg-linear-to-r from-aurora-violet via-aurora-blue to-aurora-teal bg-clip-text text-transparent",
                   },
                 ]}
               />
@@ -247,6 +249,17 @@ const Hero = () => {
               </div>
             ))}
           </motion.div>
+        </motion.div>
+
+        {/* right side: the agent-run terminal floats over the video. Only on
+            wide screens — below xl the copy needs the full width. */}
+        <motion.div
+          initial={{ opacity: 0, y: 24, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.9, delay: 1.1, ease }}
+          className="hidden w-[420px] shrink-0 xl:block"
+        >
+          <AgentTerminal />
         </motion.div>
       </div>
     </section>
