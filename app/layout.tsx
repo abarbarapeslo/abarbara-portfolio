@@ -13,13 +13,14 @@ import SmoothScroll from "@/components/ui/SmoothScroll";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vishwamshah.vercel.app"),
-  title: "Vishwam Shah | AI Engineer & Full-Stack Developer",
+  title: "Vishwam Shah | AI Engineer & Full-Stack Engineer",
   description:
-    "AI engineer and full-stack developer. I build production LLM, RAG and agentic systems, on-device computer vision (YOLO / OCR / ONNX), and scalable Next.js platforms.",
+    "AI engineer and full-stack engineer. I build production LLM, RAG and agentic systems, on-device computer vision (YOLO / OCR / ONNX), and scalable Next.js platforms.",
   keywords: [
     "Vishwam Shah",
     "AI Engineer",
     "Full Stack Developer",
+    "Full Stack Engineer",
     "Machine Learning",
     "LLM",
     "RAG",
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Vishwam Shah" }],
   openGraph: {
-    title: "Vishwam Shah | AI Engineer & Full-Stack Developer",
+    title: "Vishwam Shah | AI Engineer & Full-Stack Engineer",
     description:
       "AI engineer and full-stack developer building production AI products.",
     type: "website",
@@ -45,7 +46,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vishwam Shah | AI Engineer & Full-Stack Developer",
+    title: "Vishwam Shah | AI Engineer & Full-Stack Engineer",
     description: "AI engineer and full-stack developer building production AI products.",
   },
 };
