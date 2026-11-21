@@ -7,6 +7,7 @@ import Publications from "@/components/main/Publications";
 import AIAssistant from "@/components/main/AIAssistant";
 import Contact from "@/components/main/Contactform";
 import Footer from "@/components/main/Footer";
+import ScrollEffects from "@/components/ui/ScrollEffects";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
       <AIAssistant />
       <Contact />
       <Footer />
+      <ScrollEffects />
     </main>
   );
 }

@@ -25,10 +25,22 @@ const links = [
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [active, setActive] = useState("home");
 
+  // Hide-on-scroll: always visible over the hero; past it, scrolling down
+  // tucks the bar away and any upward scroll brings it straight back.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 20);
+      const heroBottom = (document.getElementById("home")?.offsetHeight ?? window.innerHeight) - 80;
+      if (y < heroBottom) setHidden(false);
+      else if (y > lastY + 4) setHidden(true);
+      else if (y < lastY - 4) setHidden(false);
+      lastY = y;
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -51,15 +63,25 @@ const Navbar = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Lock scroll while the mobile menu is open. On <html> (not <body>) so
+  // Lenis' autoToggle pauses smooth scrolling too.
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    if (!open) return;
+    const root = document.documentElement;
+    const prev = root.style.overflow;
+    root.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = "";
+      root.style.overflow = prev;
     };
   }, [open]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4">
+    <header
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+        hidden && !open && "-translate-y-[130%]"
+      )}
+    >
       <motion.nav
         initial={{ y: -24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -88,10 +110,10 @@ const Navbar = () => {
               key={l.id}
               href={l.href}
               className={cn(
-                "relative rounded-full px-3.5 py-1.5 text-sm transition-colors",
+                "relative rounded-full px-3.5 py-1.5 text-sm font-bold transition-colors",
                 active === l.id
                   ? "text-zinc-900"
-                  : "text-zinc-500 hover:text-zinc-900"
+                  : "text-zinc-600 hover:text-zinc-900"
               )}
             >
               {active === l.id && (

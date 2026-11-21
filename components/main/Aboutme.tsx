@@ -32,6 +32,7 @@ const Aboutme = () => {
 
       <div className="mt-14">
         <Reveal>
+          <div data-scroll-settle>
           <GlassCard className="h-full p-8 sm:p-10">
             <div className="space-y-5 text-base leading-relaxed text-zinc-600 sm:text-lg">
               <p>
@@ -80,6 +81,7 @@ const Aboutme = () => {
               </div>
             </div>
           </GlassCard>
+          </div>
         </Reveal>
 
       </div>

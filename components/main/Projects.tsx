@@ -226,13 +226,16 @@ const Cover = ({ p }: { p: Project }) => (
         project has no screenshot yet */}
     <div className={`absolute inset-0 bg-linear-to-br ${p.from} ${p.to}`} />
     {p.image && (
-      <Image
-        src={p.image}
-        alt={p.name}
-        fill
-        sizes={p.featured ? "(min-width: 1024px) 66vw, 100vw" : "(min-width: 1024px) 33vw, 100vw"}
-        className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
-      />
+      // oversized layer drifts inside the frame on scroll (ScrollEffects)
+      <div data-parallax="7" className="absolute inset-0 scale-[1.18]">
+        <Image
+          src={p.image}
+          alt={p.name}
+          fill
+          sizes={p.featured ? "(min-width: 1024px) 66vw, 100vw" : "(min-width: 1024px) 33vw, 100vw"}
+          className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+        />
+      </div>
     )}
     {/* legibility wash for the corner icon */}
     <div className="absolute inset-0 bg-linear-to-t from-black/35 via-transparent to-black/10" />

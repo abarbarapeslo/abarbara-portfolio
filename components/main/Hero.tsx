@@ -111,6 +111,8 @@ function StatValue({
 const Hero = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const bgRef = useRef<HTMLDivElement>(null);
+  const terminalRef = useRef<HTMLDivElement>(null);
 
   // Scroll-linked exit: the copy lifts and dissolves as the hero scrolls away,
   // so the hand-off to the next section is a move rather than a cut.
@@ -128,6 +130,19 @@ const Hero = () => {
           scrub: true,
         },
       });
+
+      // depth: the video lags behind and slowly zooms, the terminal rises
+      // faster than the copy — three layers moving at three speeds.
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const out = {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        };
+        gsap.to(bgRef.current, { yPercent: 22, scale: 1.08, ease: "none", scrollTrigger: out });
+        gsap.to(terminalRef.current, { y: -90, ease: "none", scrollTrigger: out });
+      }
     }, sectionRef);
     return () => ctx.revert();
   }, []);
@@ -139,7 +154,7 @@ const Hero = () => {
       className="relative flex min-h-screen w-full items-center overflow-hidden bg-[#EFE2C4]"
     >
       {/* full-bleed background — real footage, or the original shader */}
-      <div className="absolute inset-0 z-0">
+      <div ref={bgRef} className="absolute inset-0 z-0 will-change-transform">
         {heroBackground === "shader" ? (
           <ShaderBackground className="h-full w-full" />
         ) : (
@@ -259,7 +274,9 @@ const Hero = () => {
           transition={{ duration: 0.9, delay: 1.1, ease }}
           className="hidden w-[420px] shrink-0 xl:block"
         >
-          <AgentTerminal />
+          <div ref={terminalRef}>
+            <AgentTerminal />
+          </div>
         </motion.div>
       </div>
     </section>

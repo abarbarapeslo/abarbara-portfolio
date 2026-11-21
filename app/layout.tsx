@@ -9,6 +9,7 @@ import Preloader from "@/components/main/Preloader";
 import CustomCursor from "@/components/main/CustomCursor";
 import ScrollProgressBar from "@/components/ui/ScrollProgressBar";
 import AmbientSound from "@/components/ui/AmbientSound";
+import SmoothScroll from "@/components/ui/SmoothScroll";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vishwamshah.vercel.app"),
@@ -61,6 +62,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={fontVariables}>
       <body className="min-h-screen bg-canvas font-sans text-zinc-900 antialiased">
+        <SmoothScroll />
         <Preloader />
         <ScrollProgressBar />
         <CustomCursor />
