@@ -11,7 +11,7 @@ const links = [
   { label: "Experience", href: "#experience", id: "experience" },
   { label: "Skills", href: "#skills", id: "skills" },
   { label: "Work", href: "#projects", id: "projects" },
-  { label: "Research", href: "#publications", id: "publications" },
+  { label: "Certifications", href: "#publications", id: "publications" },
   { label: "Contact", href: "#contact", id: "contact" },
 ];
 
@@ -98,9 +98,9 @@ const Navbar = () => {
           <span
             className="grid h-8 w-8 place-items-center rounded-full bg-linear-to-br from-zinc-600 to-zinc-800 text-[13px] text-white shadow-soft"
           >
-            VS
+            BP
           </span>
-          <span className="hidden sm:block">Vishwam</span>
+          <span className="hidden sm:block">Bárbara Peslo</span>
         </Link>
 
         {/* desktop links */}

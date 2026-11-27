@@ -17,8 +17,9 @@ import { cn } from "@/utils/cn";
 type Role = {
   company: string;
   role: string;
-  period: string;
-  location: string;
+  period?: string;
+  location?: string;
+  summary?: string;
   points: string[];
   tags: string[];
   Icon: React.ComponentType<{ className?: string }>;
@@ -27,77 +28,90 @@ type Role = {
 
 const roles: Role[] = [
   {
-    company: "HunterRepo",
-    role: "AI Engineer",
-    period: "Mar 2026 - Jul 2026",
-    location: "Remote · Kuala Lumpur, Malaysia",
+    company: "Softplan",
+    role: "Software Analyst Jr",
+    period: "Feb 2026 – Present",
+    current: true,
     Icon: HiOutlineCpuChip,
     points: [
-      "Owned the ML pipeline for a vehicle-recovery platform end to end: curated a custom dataset, trained and validated a YOLO plate-detection model, and shipped it at 83% accuracy with sub-300ms on-device inference.",
-      "Deployed to edge devices via ONNX Runtime and native Kotlin & Swift modules, removing server round-trips entirely, and built the supporting Python services and operations portal.",
-      "Created a continuous-learning loop with an active-learning gate that auto-confirms high-confidence reads and routes uncertain crops to CVAT for retraining.",
-      "Architected a 12-step repossession state machine with RBAC, real-time SSE notifications, automated invoicing and a full audit log.",
+      "Built AI-powered workflow automations that integrate corporate systems through REST APIs and LLMs, using OpenAI, LangChain, RAG and MCP.",
+      "Developed backend automation in .NET (C#) connecting systems and databases, cutting rework and increasing traceability and governance of digital workflows.",
+      "Monitored application behavior and analyzed logs with Datadog to support stability and availability.",
+      "Validated integrations with Postman and pytest, containerized apps with Docker Compose and structured KPIs, working in agile squads with Jira.",
     ],
-    tags: ["YOLO", "ONNX Runtime", "Kotlin", "Swift", "React Native", "Next.js"],
+    tags: ["LLMs", "LangChain", "RAG", "MCP", ".NET", "Datadog", "Docker"],
   },
   {
-    company: "RealtyEaseAI",
-    role: "Full-Stack AI Engineer",
-    period: "Apr 2024 - Mar 2026",
-    location: "Remote · New York, USA",
-    Icon: HiOutlineSquares2X2,
-    points: [
-      "Architected and shipped LLM features into a production multi-tenant SaaS on GCP, integrating Groq to automate lead capture, document handling and task tracking - cutting 40 hours of manual work per week.",
-      "Designed and tuned robust prompt pipelines for classification, information extraction and content generation, iterating on accuracy, response quality, latency and token cost across multiple AI providers.",
-      "Built a production RAG pipeline over client documents with intelligent chunking, embeddings and vector search, grounding assistant answers in company-specific data and sharply reducing hallucinations.",
-      "Delivered the platform end to end with RBAC, secure APIs and real-time messaging, supporting $50K+ in transactions, while leading a 2-person team through code reviews, testing and releases.",
-    ],
-    tags: ["Next.js", "GCP", "Groq", "RAG", "Prompt Engineering", "Leadership"],
-  },
-  {
-    company: "Espread Solutions",
-    role: "AI Engineer",
-    period: "Dec 2025 - Feb 2026",
-    location: "Remote",
-    Icon: HiOutlineSparkles,
-    points: [
-      "Built AI content-generation systems on OpenAI / Gemini / Groq with custom prompt-engineering pipelines.",
-      "Developed an AI keyword generator, SEO automation and structured multi-step content workflows.",
-      "Shipped a guest-posting platform with separate Admin/User dashboards and end-to-end publishing.",
-    ],
-    tags: ["LLM APIs", "Prompt Engineering", "SEO", "Next.js"],
-  },
-  {
-    company: "DIAT - DRDO",
-    role: "Summer Intern",
-    period: "Jun 2025 - Jul 2025",
-    location: "Pune, India",
+    company: "Norsk Hydro",
+    role: "Software Engineer Intern",
+    period: "May 2024 – Aug 2025",
     Icon: HiOutlineShieldCheck,
     points: [
-      "Built and evaluated deep-learning sentiment-analysis models for a government defense use case, classifying text as positive, negative or neutral with NLP preprocessing and feature extraction.",
-      "Developed the full pipeline - preprocessing, data preparation, training, hyperparameter tuning, evaluation and real-time inference - benchmarking models on accuracy, precision, recall and F1.",
+      "Led the project, architecture and implementation of an incident monitoring and operational governance platform that automated incident management and consolidated KPIs, using Python, REST APIs, Zabbix, ServiceNow, Power BI and MySQL.",
+      "Integrated systems and digital platforms via REST APIs and LLMs, validated with Postman and pytest.",
+      "Modeled SQL databases and applied Clean Code, Clean Architecture and Design System practices in JavaScript, TypeScript and .NET.",
+      "Orchestrated Kubernetes deployments on AWS and Azure and managed tasks in Jira.",
     ],
-    tags: ["NLP", "Sentiment Analysis", "PyTorch", "Python"],
+    tags: ["Python", "REST APIs", "ServiceNow", "Power BI", "Kubernetes", "AWS", "Azure"],
   },
   {
-    company: "Demaze Technologies",
-    role: "Software Developer Intern",
-    period: "Jan 2024 - Apr 2024",
-    location: "Ahmedabad, India",
+    company: "NATTA",
+    role: "Co-founder",
+    summary: "An AI platform for discovering, applying to and managing academic and professional opportunities — such as scholarships, fellowships, accelerators and international programs. An edtech accelerated by Go Together.",
+    Icon: HiOutlineSparkles,
+    points: [
+      "Co-founded the company and work at the intersection of product, technology and business.",
+      "Coordinate the development of the platform, its AI integrations and its monetization model.",
+      "Lead growth, strategic partnerships and the company's institutional positioning.",
+    ],
+    tags: ["Product", "AI integrations", "Growth", "Partnerships"],
+  },
+  {
+    company: "Weeflow",
+    role: "Product & Tokenomics",
+    Icon: HiOutlineSquares2X2,
+    points: [
+      "Designed the tokenomics and reward mechanics of an MVP reward system.",
+      "Defined the structure of the weecoin economy and its exchange-rate anchoring.",
+    ],
+    tags: ["Tokenomics", "Product design", "Reward systems"],
+  },
+  {
+    company: "Equinix",
+    role: "Software Engineer Intern",
+    period: "Feb 2022 – Apr 2024",
     Icon: HiOutlineCodeBracket,
     points: [
-      "Built a production-ready RBAC dashboard, secure authentication system and admin panel for VidhyaX, with protected routes, secure session handling and permission-based UI rendering across multiple user roles.",
-      "Developed and integrated RESTful APIs for user, role and administrative operations, keeping frontend and backend in step behind a secure, scalable access layer.",
-      "Improved page performance ~25% through lazy loading and code splitting; shipped 5+ reviewed pull requests.",
+      "Built and maintained web applications with JavaScript, React and Node.js supporting corporate processes.",
+      "Built REST integrations between Azure, AWS, Zabbix, ServiceNow and Grafana with Node.js, .NET (C#) and Python, automating incident creation and operational data consolidation.",
+      "Monitored applications and infrastructure with Datadog, Zabbix and Grafana, supporting log analysis and incident investigation.",
+      "Created a CI/CD pipeline (build, lint, audit), contributed to database architecture and took part in code reviews and documentation.",
     ],
-    tags: ["React", "RBAC", "REST APIs", "Auth", "Tailwind"],
+    tags: ["JavaScript", "React", "Node.js", ".NET", "Python", "Datadog", "CI/CD"],
+  },
+  {
+    company: "WoHackers",
+    role: "Regional Leader",
+    period: "1 year",
+    location: "Community · Rio de Janeiro",
+    Icon: HiOutlineSparkles,
+    points: [
+      "Lead the Rio de Janeiro chapter of a tech community for women and host hackathons.",
+      "Delivered the Rio hackathon with FIAP and Solana, producing new talent and blockchain and AI projects. Won my first hackathon.",
+    ],
+    tags: ["Community", "Hackathons", "FIAP", "Solana", "AI", "Blockchain"],
   },
 ];
+
+const experienceOrder = ["Softplan", "Norsk Hydro", "Equinix", "NATTA", "WoHackers", "Weeflow"];
+const orderedRoles = experienceOrder
+  .map((company) => roles.find((role) => role.company === company))
+  .filter((role): role is Role => Boolean(role));
 
 // switchback x-positions (% of width) - kept in the central gutter so the road
 // connects at each card's inner edge and weaves between the columns, never
 // crossing a card face.
-const NODE_X = [44, 56, 43, 57, 45];
+const NODE_X = [44, 56, 43, 57, 45, 55];
 
 // Catmull-Rom -> cubic bezier smooth path through points
 function smoothPath(pts: [number, number][]) {
@@ -179,10 +193,10 @@ const Experience = () => {
         reveal="skew"
         title={
           <>
-            The road I&apos;ve <span className="text-gradient-aurora">travelled</span>
+            My <span className="text-gradient-aurora">journey</span>
           </>
         }
-        subtitle="Five roles across AI engineering and full-stack product - training models, shipping platforms and leading small teams."
+        subtitle="Experience across software, product and community — building useful systems and bringing people together."
       />
 
       <div ref={containerRef} className="relative mt-16">
@@ -217,7 +231,7 @@ const Experience = () => {
         <div className="pointer-events-none absolute left-[23px] top-2 h-[calc(100%-1rem)] border-l-2 border-dashed border-aurora-violet/25 md:hidden" />
 
         <div className="flex flex-col">
-          {roles.map((r, i) => {
+          {orderedRoles.map((r, i) => {
             const nx = NODE_X[i % NODE_X.length];
             const left = nx < 50;
             return (
@@ -246,22 +260,19 @@ const Experience = () => {
 
                 {/* card */}
                 <div className={cn("pl-16 md:pl-0", left ? "md:col-start-1 md:pr-6" : "md:col-start-2 md:pl-6")}>
-                  <div className="glass p-6 sm:p-7">
+                  <div className="glass experience-card p-6 sm:p-7">
+                    <div className="experience-card-content">
                     <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1">
                       <div>
                         <h3 className="font-display text-xl font-semibold text-fg">
                           {r.role}
                           <span className="text-fg3"> · {r.company}</span>
                         </h3>
-                        <div className="mt-0.5 text-sm text-fg4">{r.location}</div>
+                        {(r.period || r.location) && <div className="mt-0.5 text-sm text-fg4">{[r.period, r.location].filter(Boolean).join(" · ")}</div>}
                       </div>
-                      <span className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-aurora-teal">
-                        {r.current && (
-                          <span className="h-1.5 w-1.5 rounded-full bg-aurora-teal shadow-[0_0_8px_2px_rgba(20,184,166,0.6)]" />
-                        )}
-                        {r.period}
-                      </span>
+                      {r.current && <span className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-aurora-teal"><span className="h-1.5 w-1.5 rounded-full bg-aurora-teal shadow-[0_0_8px_2px_rgba(140,115,59,0.45)]" />Current</span>}
                     </div>
+                    {r.summary && <p className="experience-summary">{r.summary}</p>}
 
                     <ul className="mt-4 flex flex-col gap-2.5">
                       {r.points.map((p, j) => (
@@ -281,6 +292,7 @@ const Experience = () => {
                           {t}
                         </span>
                       ))}
+                    </div>
                     </div>
                   </div>
                 </div>

@@ -6,12 +6,13 @@ import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { HiArrowDown, HiOutlineEnvelope } from "react-icons/hi2";
 import ShimmerButton from "@/components/ui/ShimmerButton";
 import Typewriter from "@/components/ui/Typewriter";
 import { VideoBackground } from "@/components/ui/VideoBackground";
 import AgentTerminal from "@/components/ui/AgentTerminal";
+import Rainfall from "@/components/main/Rainfall";
 
 /**
  * Hero — full-bleed WebGL "Waves" shader behind the headline.
@@ -36,16 +37,13 @@ const ShaderBackground = dynamic(
 );
 
 /**
- * Which background the hero renders. The real-footage clips replaced the
- * shader as the default; the shader is kept intact and is one word away.
- *   "beach"  — top-down turquoise surf on white sand (default)
- *   "water"  — clear shallow water with sunlight caustics
- *   "shader" — the original WebGL beach-wave shader (cursor-reactive)
+ * Keep this scene independent of the page copy so its still image and motion
+ * can be tuned without changing the portfolio content.
  */
-const heroBackground = "beach" as "beach" | "water" | "shader";
+const heroBackground = "illustration" as "illustration" | "beach" | "water" | "shader";
 
 /** Titles the gradient line types, holds, erases and cycles through. */
-const roles = ["AI Engineer", "Full-Stack Engineer", "Entrepreneur"];
+const roles = ["Full-Stack Software Developer"];
 
 // Only the two figures that already existed in this codebase are kept here.
 // "40 hrs manual work automated" and "IEEE accepted research" were removed as
@@ -53,8 +51,8 @@ const roles = ["AI Engineer", "Full-Stack Engineer", "Entrepreneur"];
 // Replacements are intentionally NOT invented — add real numbers you can
 // stand behind (users served, uptime, cost saved, repeat-client rate).
 const stats: { prefix?: string; value: number; suffix?: string; label: string }[] = [
-  { value: 20, suffix: "+", label: "Client projects delivered" },
-  { prefix: "$", value: 50, suffix: "K+", label: "Transactions powered" },
+  { value: 5, suffix: "+", label: "Client projects delivered" },
+  { value: 4, suffix: "+", label: "Years of experience" },
 ];
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -151,11 +149,19 @@ const Hero = () => {
     <section
       ref={sectionRef}
       id="home"
-      className="relative flex min-h-screen w-full items-center overflow-hidden bg-[#EFE2C4]"
+      className="relative flex min-h-screen w-full items-center overflow-hidden bg-[#101d2b]"
     >
-      {/* full-bleed background — real footage, or the original shader */}
-      <div ref={bgRef} className="absolute inset-0 z-0 will-change-transform">
-        {heroBackground === "shader" ? (
+      {/* The supplied illustration stays at its original AVIF quality. */}
+      <div ref={bgRef} className="hero-scene absolute inset-0 z-0 will-change-transform" aria-hidden="true">
+        {heroBackground === "illustration" ? (
+          <>
+            <div className="hero-scene__layer hero-scene__base" />
+            <div className="hero-scene__layer hero-scene__clouds" />
+            <div className="hero-scene__layer hero-scene__foliage" />
+            <div className="hero-scene__layer hero-scene__water" />
+            <Rainfall />
+          </>
+        ) : heroBackground === "shader" ? (
           <ShaderBackground className="h-full w-full" />
         ) : (
           <VideoBackground clip={heroBackground} className="h-full w-full" />
@@ -167,7 +173,7 @@ const Hero = () => {
         className="pointer-events-none absolute inset-0 z-[1]"
         style={{
           background:
-            "linear-gradient(100deg, rgba(250,246,238,0.88) 0%, rgba(250,246,238,0.56) 40%, rgba(250,246,238,0.14) 70%, rgba(250,246,238,0) 100%)",
+            "linear-gradient(100deg, rgba(7,15,26,0.76) 0%, rgba(7,15,26,0.56) 38%, rgba(7,15,26,0.2) 72%, rgba(7,15,26,0.04) 100%)",
         }}
       />
 
@@ -183,23 +189,23 @@ const Hero = () => {
         >
           <motion.h1
             variants={item}
-            className="font-display text-[2.5rem] font-bold leading-[1.04] tracking-tight text-zinc-900 sm:text-6xl lg:text-7xl"
+            className="font-display text-[2.5rem] font-bold leading-[1.04] tracking-tight text-white sm:text-6xl lg:text-7xl"
           >
             {/* screen readers get the full title once, not every keystroke */}
-            <span className="sr-only">{`Vishwam Shah, ${roles.join(", ")}`}</span>
+            <span className="sr-only">{`Bárbara Peslo, ${roles.join(", ")}`}</span>
             <span aria-hidden>
               <Typewriter
                 speed={70}
                 startDelay={500}
                 holdMs={2000}
                 lines={[
-                  { text: "Vishwam Shah" },
+                  { text: "Bárbara Peslo" },
                   {
                     text: roles[0],
                     words: roles,
-                    className: "mt-2 whitespace-nowrap text-[2rem] sm:text-6xl lg:text-7xl",
+                    className: "mt-2 whitespace-normal text-[1.55rem] leading-tight sm:text-5xl lg:text-7xl",
                     textClassName:
-                      "bg-linear-to-r from-aurora-violet via-aurora-blue to-aurora-teal bg-clip-text text-transparent",
+                      "bg-linear-to-r from-aurora-moon via-aurora-sky to-aurora-moon bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(7,20,34,0.45)]",
                   },
                 ]}
               />
@@ -208,14 +214,11 @@ const Hero = () => {
 
           <motion.p
             variants={item}
-            className="max-w-xl text-base leading-relaxed text-zinc-600 sm:text-lg"
+            className="max-w-xl text-base leading-relaxed text-white/90 sm:text-lg"
           >
-            I build production AI products end to end: LLM, RAG &amp; agentic
-            systems, on-device computer vision, and scalable{" "}
-            <span className="font-medium text-zinc-900">Next.js</span> /{" "}
-            <span className="font-medium text-zinc-900">FastAPI</span>{" "}
-            platforms. From fine-tuned models to the last 10% of the UI, I ship
-            things people actually use.
+            I build web products, scalable platforms, and AI solutions. My goal
+            is to create practical, user-centered solutions that deliver value
+            to my clients.
           </motion.p>
 
           <motion.div variants={item} className="flex flex-wrap items-center gap-3">
@@ -229,12 +232,11 @@ const Hero = () => {
             </ShimmerButton>
             <div className="ml-1 flex items-center gap-1">
               {[
-                { Icon: FaGithub, href: "https://github.com/vishwam-shah" },
+                { Icon: FaGithub, href: "https://github.com/abarbarapeslo" },
                 {
                   Icon: FaLinkedin,
-                  href: "https://www.linkedin.com/in/vishwam-shah/",
+                  href: "https://www.linkedin.com/in/barbarapeslo/",
                 },
-                { Icon: FaXTwitter, href: "https://twitter.com/vishwamshah007" },
               ].map(({ Icon, href }) => (
                 <Link
                   key={href}
@@ -258,7 +260,7 @@ const Hero = () => {
                 className="crystal crystal-light rounded-2xl px-5 py-4"
               >
                 <StatValue prefix={s.prefix} value={s.value} suffix={s.suffix} />
-                <div className="mt-1 text-[11px] uppercase tracking-wider text-zinc-400">
+                <div className="mt-1 text-[11px] uppercase tracking-wider text-zinc-900">
                   {s.label}
                 </div>
               </div>

@@ -44,7 +44,7 @@ const ShimmerButton = ({
   const inner = moving ? (
     <>
       {/* travelling line around the border */}
-      <span className="absolute inset-[-150%] animate-border-spin bg-[conic-gradient(from_0deg,transparent_0deg,transparent_230deg,var(--color-aurora-violet)_290deg,var(--color-aurora-blue)_320deg,var(--color-aurora-teal)_345deg,transparent_360deg)]" />
+      <span className="absolute inset-[-150%] animate-border-spin bg-[conic-gradient(from_0deg,transparent_0deg,transparent_230deg,var(--color-aurora-violet)_290deg,var(--color-aurora-blue)_320deg,var(--color-aurora-moon)_345deg,transparent_360deg)]" />
       <span className={face}>{children}</span>
     </>
   ) : (

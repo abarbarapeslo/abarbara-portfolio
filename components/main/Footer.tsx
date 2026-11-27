@@ -2,8 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { FaGithub, FaLinkedin, FaXTwitter, FaWhatsapp } from "react-icons/fa6";
-import { SiWellfound } from "react-icons/si";
+import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { HiArrowUp } from "react-icons/hi2";
 import Button from "@/components/ui/Button";
 
@@ -12,16 +11,13 @@ const nav = [
   { label: "Experience", href: "#experience" },
   { label: "Skills", href: "#skills" },
   { label: "Work", href: "#projects" },
-  { label: "Research", href: "#publications" },
+  { label: "Certifications", href: "#publications" },
   { label: "Contact", href: "#contact" },
 ];
 
 const socials = [
-  { Icon: FaGithub, href: "https://github.com/vishwam-shah", label: "GitHub" },
-  { Icon: FaLinkedin, href: "https://www.linkedin.com/in/vishwam-shah/", label: "LinkedIn" },
-  { Icon: FaXTwitter, href: "https://twitter.com/vishwamshah007", label: "X" },
-  { Icon: SiWellfound, href: "https://wellfound.com/u/vishwam-shah-4", label: "Wellfound" },
-  { Icon: FaWhatsapp, href: "https://wa.me/917984683397", label: "WhatsApp" },
+  { Icon: FaGithub, href: "https://github.com/abarbarapeslo", label: "GitHub" },
+  { Icon: FaLinkedin, href: "https://www.linkedin.com/in/barbarapeslo/", label: "LinkedIn" },
 ];
 
 const Footer = () => {
@@ -36,15 +32,14 @@ const Footer = () => {
             <div>
               <Link href="#home" className="flex items-center gap-2">
                 <span className="grid h-10 w-10 place-items-center rounded-xl bg-linear-to-br from-zinc-600 to-zinc-800 font-display text-sm font-bold text-white shadow-soft">
-                  VS
+                  BP
                 </span>
                 <span className="font-display text-lg font-semibold text-fg">
-                  Vishwam Shah
+                  Bárbara Peslo
                 </span>
               </Link>
               <p className="mt-4 max-w-sm text-sm leading-relaxed text-fg3">
-                AI engineer and full-stack developer building production AI
-                products at the edge of machine learning and the web.
+                Full-stack software developer building web products, scalable platforms, and AI solutions.
               </p>
               <Button href="#contact" variant="primary" className="mt-6">
                 Start a conversation
@@ -103,19 +98,6 @@ const Footer = () => {
                 role="img"
               >
                 <path d="M12 21s-6.716-4.297-9.193-8.07C1.07 10.36 1.64 6.9 4.41 5.66c2.02-.9 4.06-.18 5.27 1.36L12 9.5l2.32-2.48c1.21-1.54 3.25-2.26 5.27-1.36 2.77 1.24 3.34 4.7 1.6 7.27C18.72 16.7 12 21 12 21z" />
-              </svg>
-              in
-              <svg
-                viewBox="0 0 9 6"
-                className="h-3 w-[18px] shrink-0 rounded-[1.5px] ring-1 ring-black/10"
-                aria-label="India"
-                role="img"
-              >
-                <rect width="9" height="6" fill="#fff" />
-                <rect width="9" height="2" fill="#ff9933" />
-                <rect y="4" width="9" height="2" fill="#138808" />
-                <circle cx="4.5" cy="3" r="0.75" fill="none" stroke="#000088" strokeWidth="0.18" />
-                <circle cx="4.5" cy="3" r="0.12" fill="#000088" />
               </svg>
             </p>
             <a

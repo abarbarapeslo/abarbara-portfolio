@@ -50,12 +50,12 @@ type WireDef = {
 };
 
 const wireDefs: WireDef[] = [
-  { points: [[1.5, 0.9, 0.05], [2.5, 1.3, -0.5], [3.4, 0.9, -1.2]], color: "#7c5cff", speed: 0.32, offset: 0 },
-  { points: [[1.5, -0.5, 0.05], [2.7, -0.9, -0.4], [3.6, -1.4, -1.0]], color: "#14b8a6", speed: 0.24, offset: 0.4 },
-  { points: [[-1.5, 0.5, 0.05], [-2.6, 0.9, -0.5], [-3.5, 1.5, -1.1]], color: "#5b7bff", speed: 0.28, offset: 0.7 },
-  { points: [[-1.5, -0.8, 0.05], [-2.5, -1.2, -0.4], [-3.3, -0.8, -1.3]], color: "#7c5cff", speed: 0.3, offset: 0.2 },
-  { points: [[0.7, 1.55, 0.05], [1.0, 2.5, -0.6], [0.4, 3.4, -1.2]], color: "#14b8a6", speed: 0.26, offset: 0.9 },
-  { points: [[-0.6, -1.55, 0.05], [-1.0, -2.5, -0.5], [-0.4, -3.3, -1.1]], color: "#5b7bff", speed: 0.34, offset: 0.55 },
+  { points: [[1.5, 0.9, 0.05], [2.5, 1.3, -0.5], [3.4, 0.9, -1.2]], color: "#153b5b", speed: 0.32, offset: 0 },
+  { points: [[1.5, -0.5, 0.05], [2.7, -0.9, -0.4], [3.6, -1.4, -1.0]], color: "#d7c77f", speed: 0.24, offset: 0.4 },
+  { points: [[-1.5, 0.5, 0.05], [-2.6, 0.9, -0.5], [-3.5, 1.5, -1.1]], color: "#4d91b8", speed: 0.28, offset: 0.7 },
+  { points: [[-1.5, -0.8, 0.05], [-2.5, -1.2, -0.4], [-3.3, -0.8, -1.3]], color: "#153b5b", speed: 0.3, offset: 0.2 },
+  { points: [[0.7, 1.55, 0.05], [1.0, 2.5, -0.6], [0.4, 3.4, -1.2]], color: "#d7c77f", speed: 0.26, offset: 0.9 },
+  { points: [[-0.6, -1.55, 0.05], [-1.0, -2.5, -0.5], [-0.4, -3.3, -1.1]], color: "#4d91b8", speed: 0.34, offset: 0.55 },
 ];
 
 function Wire({ def }: { def: WireDef }) {
@@ -80,7 +80,7 @@ function Wire({ def }: { def: WireDef }) {
     <group>
       {/* insulated wire */}
       <mesh geometry={geom} castShadow>
-        <meshStandardMaterial color="#2a2740" metalness={0.7} roughness={0.45} envMapIntensity={1} />
+        <meshStandardMaterial color="#10283b" metalness={0.7} roughness={0.45} envMapIntensity={1} />
       </mesh>
       {/* endpoint connector */}
       <mesh position={endNode}>
@@ -106,7 +106,7 @@ function Chip() {
   const goldMat = useMemo(
     () =>
       new THREE.MeshStandardMaterial({
-        color: "#caa24a",
+        color: "#d7c77f",
         metalness: 1,
         roughness: 0.34,
         envMapIntensity: 1.3,
@@ -132,12 +132,12 @@ function Chip() {
       <group ref={group}>
         {/* package substrate, standing vertical, facing the camera */}
         <RoundedBox args={[3.1, 3.1, 0.34]} radius={0.08} smoothness={4} castShadow receiveShadow>
-          <meshStandardMaterial color="#12121a" roughness={0.62} metalness={0.45} envMapIntensity={0.8} />
+          <meshStandardMaterial color="#10283b" roughness={0.62} metalness={0.45} envMapIntensity={0.8} />
         </RoundedBox>
 
         {/* inner bezel */}
         <RoundedBox args={[2.5, 2.5, 0.36]} radius={0.06} smoothness={4} position={[0, 0, 0.01]}>
-          <meshStandardMaterial color="#1b1626" roughness={0.5} metalness={0.7} />
+          <meshStandardMaterial color="#153b5b" roughness={0.5} metalness={0.7} />
         </RoundedBox>
 
         {/* brushed metal frame around the die */}
@@ -149,8 +149,8 @@ function Chip() {
         <RoundedBox args={[1.5, 1.5, 0.1]} radius={0.04} smoothness={3} position={[0, 0, 0.26]}>
           <meshStandardMaterial
             ref={die}
-            color="#241a45"
-            emissive="#7c5cff"
+            color="#153b5b"
+            emissive="#4d91b8"
             emissiveIntensity={1.3}
             roughness={0.32}
             metalness={0.55}
@@ -193,19 +193,19 @@ const HeroChip = () => {
       >
         <ambientLight intensity={0.5} />
         <directionalLight position={[4, 6, 5]} intensity={1.6} castShadow shadow-mapSize={[1024, 1024]} />
-        <pointLight position={[-4, 2, 2]} intensity={45} color="#7c5cff" />
-        <pointLight position={[4, -1, 3]} intensity={30} color="#14b8a6" />
+        <pointLight position={[-4, 2, 2]} intensity={45} color="#4d91b8" />
+        <pointLight position={[4, -1, 3]} intensity={30} color="#d7c77f" />
 
         <Suspense fallback={null}>
           <Chip />
           <Environment resolution={256}>
             <Lightformer intensity={2} position={[0, 4, 3]} scale={[7, 7, 1]} color="#ffffff" />
-            <Lightformer intensity={1.4} position={[-4, 1, 3]} scale={[3, 3, 1]} color="#a78bfa" />
-            <Lightformer intensity={1.2} position={[4, 1, 3]} scale={[3, 3, 1]} color="#5eead4" />
+            <Lightformer intensity={1.4} position={[-4, 1, 3]} scale={[3, 3, 1]} color="#75c5e4" />
+            <Lightformer intensity={1.2} position={[4, 1, 3]} scale={[3, 3, 1]} color="#d7c77f" />
           </Environment>
         </Suspense>
 
-        <ContactShadows position={[0, -2.4, 0]} opacity={0.3} scale={10} blur={2.8} far={4} color="#1b1530" />
+        <ContactShadows position={[0, -2.4, 0]} opacity={0.3} scale={10} blur={2.8} far={4} color="#10283b" />
       </Canvas>
     </div>
   );

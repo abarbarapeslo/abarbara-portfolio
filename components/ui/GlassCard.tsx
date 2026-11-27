@@ -68,7 +68,7 @@ const GlassCard = ({
           className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           style={{
             background:
-              "radial-gradient(420px circle at var(--x) var(--y), rgba(124,92,255,0.18), transparent 45%)",
+              "radial-gradient(420px circle at var(--x) var(--y), rgba(77,145,184,0.16) 0%, rgba(215,199,127,0.12) 30%, transparent 68%)",
           }}
         />
       )}

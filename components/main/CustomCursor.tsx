@@ -29,24 +29,18 @@ const CustomCursor = () => {
     let hovering = false;
     let raf = 0;
 
-    // Hidden while the preloader runs, and after it until the visitor actually
-    // moves the pointer — then it appears right under the pointer instead of
-    // sliding in from the centre of the screen.
-    let loaderDone = document.documentElement.hasAttribute("data-preloader-done");
+    // Keep the custom cursor hidden until the first pointer move so it appears
+    // at the real pointer position instead of jumping in from the viewport center.
     let visible = false;
     const setOpacity = (v: string) => {
       dot.style.opacity = v;
       ring.style.opacity = v;
     };
     setOpacity("0");
-    const onLoaderDone = () => {
-      loaderDone = true;
-    };
-
     const onMove = (e: PointerEvent) => {
       mx = e.clientX;
       my = e.clientY;
-      if (loaderDone && !visible) {
+      if (!visible) {
         visible = true;
         rx = mx;
         ry = my;
@@ -77,7 +71,6 @@ const CustomCursor = () => {
     };
     loop();
 
-    window.addEventListener("preloaderdone", onLoaderDone);
     window.addEventListener("pointermove", onMove, { passive: true });
     window.addEventListener("pointerdown", onDown);
     window.addEventListener("pointerup", onUp);
@@ -86,7 +79,6 @@ const CustomCursor = () => {
 
     return () => {
       cancelAnimationFrame(raf);
-      window.removeEventListener("preloaderdone", onLoaderDone);
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerdown", onDown);
       window.removeEventListener("pointerup", onUp);

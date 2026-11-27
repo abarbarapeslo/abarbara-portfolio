@@ -1,15 +1,12 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
-import { toast } from "sonner";
 import {
   HiOutlineEnvelope,
   HiOutlineMapPin,
-  HiOutlinePhone,
   HiOutlinePaperAirplane,
 } from "react-icons/hi2";
-import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
 import Reveal from "@/components/ui/Reveal";
@@ -18,50 +15,37 @@ const details = [
   {
     Icon: HiOutlineEnvelope,
     label: "Email",
-    value: "vishwamshah007@gmail.com",
-    href: "mailto:vishwamshah007@gmail.com",
-  },
-  {
-    Icon: HiOutlinePhone,
-    label: "Phone",
-    value: "+91 79846 83397",
-    href: "tel:+917984683397",
+    value: "lopes.barbarav@gmail.com",
+    href: "mailto:lopes.barbarav@gmail.com",
   },
   {
     Icon: HiOutlineMapPin,
     label: "Location",
-    value: "Ahmedabad, India",
+    value: "Rio de Janeiro, Brazil",
   },
 ];
 
 const socials = [
-  { Icon: FaGithub, href: "https://github.com/vishwam-shah" },
-  { Icon: FaLinkedin, href: "https://www.linkedin.com/in/vishwam-shah/" },
-  { Icon: FaXTwitter, href: "https://twitter.com/vishwamshah007" },
+  { Icon: FaGithub, href: "https://github.com/abarbarapeslo" },
+  { Icon: FaLinkedin, href: "https://www.linkedin.com/in/barbarapeslo/" },
 ];
 
 const Contact = () => {
   const form = useRef<HTMLFormElement>(null);
-  const [sending, setSending] = useState(false);
+  const [openingEmail, setOpeningEmail] = useState(false);
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!form.current) return;
-    setSending(true);
-
-    emailjs
-      .sendForm("service_2svnepu", "template_vmeyoep", form.current, {
-        publicKey: "N27zaoCMdknIVor8g",
-      })
-      .then(() => {
-        toast.success("Thanks for reaching out, I'll get back to you soon!");
-        form.current?.reset();
-      })
-      .catch((err) => {
-        console.error("EmailJS error:", err);
-        toast.error("Something went wrong. Please email me directly.");
-      })
-      .finally(() => setSending(false));
+    const fields = new FormData(form.current);
+    const name = String(fields.get("from_name") ?? "").trim();
+    const email = String(fields.get("from_email") ?? "").trim();
+    const message = String(fields.get("message") ?? "").trim();
+    const subject = encodeURIComponent(`Portfolio message from ${name}`);
+    const body = encodeURIComponent(`${message}\n\nFrom: ${name}\nEmail: ${email}`);
+    setOpeningEmail(true);
+    window.location.href = `mailto:lopes.barbarav@gmail.com?subject=${subject}&body=${body}`;
+    window.setTimeout(() => setOpeningEmail(false), 1200);
   };
 
   return (
@@ -83,7 +67,7 @@ const Contact = () => {
         <div className="glass flex flex-col justify-between gap-8 p-8">
           <div>
             <h3 className="font-display text-2xl font-semibold text-fg">
-              Get in touch
+              <span className="text-gradient-aurora">Get in touch</span>
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-fg3">
               I&apos;m open to full-time roles, freelance work and research
@@ -167,8 +151,8 @@ const Contact = () => {
                 className="ipt resize-none"
               />
             </Field>
-            <Button type="submit" variant="primary" disabled={sending}>
-              {sending ? "Sending…" : "Send message"}
+            <Button type="submit" variant="primary" disabled={openingEmail}>
+              {openingEmail ? "Opening email…" : "Send a message"}
               <HiOutlinePaperAirplane className="h-4 w-4 -rotate-45" />
             </Button>
           </form>
@@ -191,8 +175,8 @@ const Contact = () => {
           color: #a1a1aa;
         }
         :global(.ipt:focus) {
-          border-color: rgba(124, 92, 255, 0.6);
-          box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.14);
+          border-color: rgba(21, 59, 91, 0.65);
+          box-shadow: 0 0 0 3px rgba(21, 59, 91, 0.14);
         }
       `}</style>
     </section>

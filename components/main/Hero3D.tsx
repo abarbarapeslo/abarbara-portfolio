@@ -26,14 +26,14 @@ function Core() {
         {/* soft halo (fake bloom, no postprocessing dependency) */}
         <mesh scale={1.9}>
           <sphereGeometry args={[1.25, 32, 32]} />
-          <meshBasicMaterial color="#a78bfa" transparent opacity={0.12} />
+          <meshBasicMaterial color="#75c5e4" transparent opacity={0.12} />
         </mesh>
 
         {/* solid distorted core */}
         <Icosahedron args={[1.25, 12]}>
           <MeshDistortMaterial
-            color="#7c5cff"
-            emissive="#3b82f6"
+            color="#153b5b"
+            emissive="#4d91b8"
             emissiveIntensity={0.45}
             roughness={0.18}
             metalness={0.55}
@@ -44,7 +44,7 @@ function Core() {
 
         {/* faceted wireframe shell */}
         <Icosahedron args={[1.7, 1]}>
-          <meshBasicMaterial color="#14b8a6" wireframe transparent opacity={0.25} />
+          <meshBasicMaterial color="#d7c77f" wireframe transparent opacity={0.25} />
         </Icosahedron>
       </Float>
     </group>
@@ -104,7 +104,7 @@ function Dust() {
       </bufferGeometry>
       <pointsMaterial
         size={0.02}
-        color="#7c5cff"
+        color="#153b5b"
         transparent
         opacity={0.55}
         sizeAttenuation
@@ -125,8 +125,8 @@ const Hero3D = () => {
       <Suspense fallback={null}>
         <ambientLight intensity={0.7} />
         <directionalLight position={[3, 4, 5]} intensity={2.4} color="#ffffff" />
-        <pointLight position={[-4, -2, -3]} intensity={3} color="#14b8a6" />
-        <pointLight position={[4, -3, 2]} intensity={2} color="#d946ef" />
+        <pointLight position={[-4, -2, -3]} intensity={3} color="#4d91b8" />
+        <pointLight position={[4, -3, 2]} intensity={2} color="#d7c77f" />
         <Core />
         <Dust />
       </Suspense>

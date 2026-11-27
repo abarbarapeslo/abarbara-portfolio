@@ -12,7 +12,7 @@ type Msg = { role: "user" | "ai"; text: string };
 type Step = "message" | "name" | "phone" | "done";
 
 const GREETING =
-  "Hi, I'm Vishwam's AI assistant. Tell me what you'd like to reach out about and I'll pass it straight to him.";
+  "Hi, I'm Bárbara's AI assistant. Tell me what you'd like to reach out about and I'll pass it straight to her.";
 
 const QUICK = [
   "I'd like to hire you.",
@@ -90,15 +90,15 @@ const AIAssistant = () => {
           // email - the visitor only gives a phone here, so keep the owner's
           // address and surface the phone in the message body instead.
           from_name: lead.current.name,
-          from_email: "vishwamshah007@gmail.com",
+          from_email: "Lopes.barbarav@gmail.com",
           message: `New lead from the AI assistant:\n\n${lead.current.message}\n\nName: ${lead.current.name}\nPhone: ${lead.current.phone}`,
         },
         { publicKey: "N27zaoCMdknIVor8g" }
       );
-      toast.success("Message sent to Vishwam!");
+      toast.success("Message sent to Bárbara!");
     } catch (err) {
       console.error("EmailJS error:", err);
-      toast.error("Couldn't send. Please email vishwamshah007@gmail.com directly.");
+      toast.error("Couldn't send. Please email Lopes.barbarav@gmail.com directly.");
     }
   };
 
@@ -132,7 +132,7 @@ const AIAssistant = () => {
       lead.current.phone = value;
       setStep("done");
       await sayAI(
-        `Perfect, ${lead.current.name.split(" ")[0]}. I've sent your message to Vishwam and he'll reach out soon. Thanks for stopping by!`
+        `Perfect, ${lead.current.name.split(" ")[0]}. I've sent your message to Bárbara and she'll reach out soon. Thanks for stopping by!`
       );
       await sendLead();
     }
@@ -160,17 +160,17 @@ const AIAssistant = () => {
       >
         {/* travelling line around the card (masked to the border band) */}
         <span className="moving-ring">
-          <span className="absolute inset-[-150%] animate-border-spin bg-[conic-gradient(from_0deg,transparent_0deg,transparent_236deg,var(--color-aurora-violet)_290deg,var(--color-aurora-blue)_320deg,var(--color-aurora-teal)_348deg,transparent_360deg)]" />
+          <span className="absolute inset-[-150%] animate-border-spin bg-[conic-gradient(from_0deg,transparent_0deg,transparent_236deg,var(--color-aurora-violet)_290deg,var(--color-aurora-blue)_320deg,var(--color-aurora-moon)_348deg,transparent_360deg)]" />
         </span>
 
         <div className="glass relative z-10 overflow-hidden p-0">
         {/* header */}
         <div className="flex items-center gap-3 border-b border-line px-5 py-4">
-          <span className="grid h-9 w-9 place-items-center rounded-full bg-linear-to-br from-aurora-violet to-aurora-teal text-white shadow-glow">
+          <span className="grid h-9 w-9 place-items-center rounded-full bg-linear-to-br from-aurora-violet to-aurora-moon text-white shadow-glow">
             <SparkleIcon size={18} active={typing} />
           </span>
           <div>
-            <div className="text-sm font-semibold text-fg">Vishwam AI</div>
+            <div className="text-sm font-semibold text-fg">Bárbara AI</div>
             <div className="flex items-center gap-1.5 text-xs text-fg4">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
               {typing ? "typing..." : "online"}

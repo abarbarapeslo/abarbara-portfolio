@@ -5,20 +5,18 @@ import { Toaster } from "sonner";
 import { fontVariables } from "./fonts";
 import AuroraBackground from "@/components/main/AuroraBackground";
 import Navbar from "@/components/main/Navbar";
-import Preloader from "@/components/main/Preloader";
 import CustomCursor from "@/components/main/CustomCursor";
 import ScrollProgressBar from "@/components/ui/ScrollProgressBar";
 import AmbientSound from "@/components/ui/AmbientSound";
 import SmoothScroll from "@/components/ui/SmoothScroll";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vishwamshah.vercel.app"),
-  title: "Vishwam Shah | AI Engineer & Full-Stack Engineer",
+  title: "Bárbara Peslo | Full-Stack Software Developer",
   description:
-    "AI engineer and full-stack engineer. I build production LLM, RAG and agentic systems, on-device computer vision (YOLO / OCR / ONNX), and scalable Next.js platforms.",
+    "Full-stack software developer building web products, scalable platforms, and AI solutions.",
   keywords: [
-    "Vishwam Shah",
-    "AI Engineer",
+    "Bárbara Peslo",
+    "Full-Stack Software Developer",
     "Full Stack Developer",
     "Full Stack Engineer",
     "Machine Learning",
@@ -36,18 +34,17 @@ export const metadata: Metadata = {
     "Python",
     "Portfolio",
   ],
-  authors: [{ name: "Vishwam Shah" }],
+  authors: [{ name: "Bárbara Peslo" }],
   openGraph: {
-    title: "Vishwam Shah | AI Engineer & Full-Stack Engineer",
-    description:
-      "AI engineer and full-stack engineer building production AI products.",
+    title: "Bárbara Peslo | Full-Stack Software Developer",
+    description: "Building web products, scalable platforms, and AI solutions.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vishwam Shah | AI Engineer & Full-Stack Engineer",
-    description: "AI engineer and full-stack engineer building production AI products.",
+    title: "Bárbara Peslo | Full-Stack Software Developer",
+    description: "Building web products, scalable platforms, and AI solutions.",
   },
 };
 
@@ -64,7 +61,6 @@ export default function RootLayout({
     <html lang="en" className={fontVariables}>
       <body className="min-h-screen bg-canvas font-sans text-zinc-900 antialiased">
         <SmoothScroll />
-        <Preloader />
         <ScrollProgressBar />
         <CustomCursor />
         <AuroraBackground />

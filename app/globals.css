@@ -8,7 +8,7 @@
   --color-ink-900: #0a0a0f;
   --color-ink-800: #14141b;
 
-  --color-canvas: #fbfbfd;
+  --color-canvas: #f2f5f7;
 
   /* Semantic neutrals — RE-SKIN THE WHOLE SITE FROM HERE.
      fg = headings, fg2 = body, fg3 = muted, fg4 = faint, line = borders. */
@@ -19,18 +19,22 @@
   --color-line: oklch(0 0 0 / 0.08);
 
   /* Accent palette — change the brand here. */
-  --color-aurora-violet: #7c5cff;
-  --color-aurora-indigo: #5b7bff;
-  --color-aurora-teal: #14b8a6;
-  --color-aurora-blue: #3b82f6;
-  --color-aurora-pink: #d946ef;
+  /* Azul e luar palette: midnight blue, lake blue and moon gold. */
+  --color-aurora-violet: #153b5b;
+  --color-aurora-indigo: #4d91b8;
+  --color-aurora-teal: #8c733b;
+  --color-aurora-blue: #4d91b8;
+  --color-aurora-pink: #d7c77f;
+  --color-aurora-sky: #75c5e4;
+  --color-aurora-moon: #d7c77f;
+  --color-aurora-moon-ink: #8c733b;
 
   --shadow-soft: 0 1px 2px rgba(16, 16, 24, 0.04),
     0 12px 32px -16px rgba(16, 16, 24, 0.18);
   --shadow-glow: 0 1px 2px rgba(16, 16, 24, 0.05),
-    0 24px 60px -28px rgba(124, 92, 255, 0.5);
+    0 24px 60px -28px rgba(21, 59, 91, 0.28);
   --shadow-glow-teal: 0 1px 2px rgba(16, 16, 24, 0.05),
-    0 24px 60px -28px rgba(20, 184, 166, 0.4);
+    0 24px 60px -28px rgba(215, 199, 127, 0.38);
 
   --animate-aurora-1: aurora-1 22s ease-in-out infinite;
   --animate-aurora-2: aurora-2 26s ease-in-out infinite;
@@ -98,7 +102,7 @@
    Base
 --------------------------------------------------------------------------- */
 :root {
-  --bg: #fbfbfd;
+  --bg: #f2f5f7;
 }
 
 * {
@@ -120,14 +124,14 @@ body {
 }
 
 ::selection {
-  background: rgba(124, 92, 255, 0.18);
+  background: rgba(21, 59, 91, 0.18);
   color: #18181b;
 }
 
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: #f0f0f4; }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #7c5cff, #14b8a6);
+  background: linear-gradient(180deg, #153b5b, #d7c77f);
   border-radius: 999px;
   border: 2px solid #f0f0f4;
 }
@@ -144,7 +148,7 @@ body {
   background-size: 56px 56px;
 }
 @utility bg-dots {
-  background-image: radial-gradient(rgba(16, 16, 24, 0.12) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(16, 16, 24, 0.08) 1px, transparent 1px);
   background-size: 22px 22px;
 }
 @utility scrollbar-hidden {
@@ -191,10 +195,18 @@ body {
       inset 0 1px 0 0 rgba(255, 255, 255, 0.6),
       0 12px 30px -20px rgba(16, 16, 24, 0.18);
   }
+  .experience-card { isolation: isolate; overflow: hidden; }
+  .experience-card::after { z-index: 1; }
+  .experience-card-content { position: relative; z-index: 2; }
+  .experience-summary { position: relative; max-width: 48rem; margin-top: 1rem; color: rgb(82 82 91 / .86); font-size: .875rem; line-height: 1.65; }
+  .project-cover-art-ambient .project-cover-image { opacity: .8; filter: blur(4px) brightness(.62) saturate(.72); }
+  .project-cover-art-ambient { opacity: .96; }
+  .project-cover-art-logo { mix-blend-mode: multiply; }
+  .project-cover-art-logo .project-cover-image { opacity: 1; filter: none; object-fit: cover; object-position: center; }
 
   .text-gradient-aurora {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(100deg, #7c3aed, #2563eb 48%, #0d9488);
+    background-image: linear-gradient(100deg, #153b5b, #4d91b8 48%, #8c733b);
   }
 
   .eyebrow {
@@ -205,18 +217,112 @@ body {
   .btn-primary {
     @apply relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-3
            text-sm font-semibold text-white transition-all duration-300;
-    background: linear-gradient(120deg, #7c5cff, #5b7bff 50%, #14b8a6);
-    box-shadow: 0 10px 26px -10px rgba(124, 92, 255, 0.6);
+    background: linear-gradient(120deg, #153b5b, #4d91b8 50%, #d7c77f);
+    box-shadow: 0 10px 26px -10px rgba(21, 59, 91, 0.38);
   }
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 16px 36px -12px rgba(124, 92, 255, 0.75);
+    box-shadow: 0 16px 36px -12px rgba(21, 59, 91, 0.46);
   }
 
   .btn-ghost {
     @apply inline-flex items-center justify-center gap-2 rounded-full border border-black/[0.1]
            bg-white/70 px-6 py-3 text-sm font-semibold text-zinc-700 backdrop-blur-sm
            transition-all duration-300 hover:border-black/20 hover:bg-white hover:text-zinc-900;
+  }
+
+  .hero-scene {
+    isolation: isolate;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .hero-scene__layer {
+    position: absolute;
+    inset: -0.5%;
+    background-image: url("/hero/portfolio-scene.avif");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    pointer-events: none;
+    will-change: transform, background-position;
+  }
+
+  .hero-scene__base {
+    inset: 0;
+  }
+
+  .hero-scene__clouds {
+    z-index: 1;
+    opacity: 0.2;
+    mix-blend-mode: screen;
+    mask-image: linear-gradient(to bottom, #000 0%, #000 34%, transparent 52%);
+    animation: scene-cloud-drift 48s ease-in-out infinite alternate;
+  }
+
+  .hero-scene__foliage {
+    z-index: 2;
+    opacity: 0.14;
+    mask-image:
+      radial-gradient(ellipse 34% 69% at 3% 35%, #000 28%, transparent 92%),
+      radial-gradient(ellipse 19% 43% at 98% 43%, #000 32%, transparent 92%);
+    animation: scene-foliage-sway 8.5s ease-in-out infinite alternate;
+  }
+
+  .hero-scene__water {
+    z-index: 3;
+    opacity: 0.27;
+    mix-blend-mode: screen;
+    background-size: 102% 102%;
+    mask-image: linear-gradient(to bottom, transparent 63%, #000 70%);
+    animation: scene-water-shimmer 7s ease-in-out infinite alternate;
+  }
+
+  .hero-rainfall {
+    position: absolute;
+    z-index: 4;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    /* Keep the rain atmospheric: visible across the open sky and lake, but
+       softly dissolved over the tree line and the left-side copy. */
+    mask-image:
+      linear-gradient(100deg, transparent 4%, rgba(0, 0, 0, 0.16) 43%, #000 76%),
+      linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 53%,
+        transparent 62%,
+        transparent 69%,
+        #000 78%,
+        #000 100%
+      );
+    mask-composite: intersect;
+    pointer-events: none;
+  }
+
+  @keyframes scene-cloud-drift {
+    from { transform: translate3d(-0.32%, 0, 0); }
+    to { transform: translate3d(0.32%, -0.12%, 0); }
+  }
+
+  @keyframes scene-foliage-sway {
+    from { transform: translate3d(-1px, 0, 0); }
+    to { transform: translate3d(1px, -0.12%, 0); }
+  }
+
+  @keyframes scene-water-shimmer {
+    from { transform: translate3d(-0.12%, 0, 0) scale(1); }
+    to { transform: translate3d(0.12%, -0.08%, 0) scale(1.008); }
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-scene__clouds,
+  .hero-scene__foliage,
+  .hero-scene__water {
+    animation: none;
   }
 }
 
@@ -246,31 +352,32 @@ html[data-custom-cursor] .cursor-ring {
   display: block;
 }
 .cursor-dot {
-  height: 7px;
-  width: 7px;
+  height: 6px;
+  width: 6px;
   border-radius: 9999px;
-  background: #18181b;
-  box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.85);
+  background: #fbfbfd;
+  border: 1px solid #18181b;
+  box-shadow: 0 0 0 1px rgba(251, 251, 253, 0.55);
   transition: opacity 0.2s ease;
 }
 .cursor-ring {
-  height: 34px;
-  width: 34px;
+  height: 28px;
+  width: 28px;
   border-radius: 9999px;
-  border: 1.5px solid #18181b;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.6);
-  transition: width 0.25s ease, height 0.25s ease, background-color 0.25s ease,
+  border: 1px solid rgba(24, 24, 27, 0.62);
+  box-shadow: 0 0 0 1px rgba(251, 251, 253, 0.42);
+  transition: width 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), height 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.22s ease,
     opacity 0.25s ease;
 }
 .cursor-ring[data-hover="true"] {
-  height: 58px;
-  width: 58px;
-  background: rgba(24, 24, 27, 0.08);
+  height: 40px;
+  width: 40px;
+  border-color: rgba(140, 115, 59, 0.9);
+  background: rgba(215, 199, 127, 0.12);
 }
 .cursor-ring[data-down="true"] {
-  height: 24px;
-  width: 24px;
+  height: 23px;
+  width: 23px;
 }
 
 /* Moving-border ring: a rotating conic gradient masked to just the border band,

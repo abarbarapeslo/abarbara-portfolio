@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { FaGithub, FaLinkedin, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { HiOutlineEnvelope } from "react-icons/hi2";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GlassCard from "@/components/ui/GlassCard";
@@ -10,10 +10,8 @@ import Reveal from "@/components/ui/Reveal";
 import ShimmerButton from "@/components/ui/ShimmerButton";
 
 const socials = [
-  { Icon: FaLinkedin, href: "https://www.linkedin.com/in/vishwam-shah", hover: "hover:text-aurora-blue" },
-  { Icon: FaGithub, href: "https://github.com/vishwam-shah", hover: "hover:text-zinc-900" },
-  { Icon: FaInstagram, href: "https://www.instagram.com/vishwam07", hover: "hover:text-aurora-pink" },
-  { Icon: FaWhatsapp, href: "https://wa.me/917984683397", hover: "hover:text-aurora-teal" },
+  { Icon: FaLinkedin, href: "https://www.linkedin.com/in/barbarapeslo/", hover: "hover:text-aurora-blue" },
+  { Icon: FaGithub, href: "https://github.com/abarbarapeslo", hover: "hover:text-zinc-900" },
 ];
 
 const Aboutme = () => {
@@ -24,8 +22,7 @@ const Aboutme = () => {
         eyebrow="About"
         title={
           <>
-            Engineer at the intersection of{" "}
-            <span className="text-gradient-aurora">AI &amp; the web</span>
+            Full-Stack Software Developer
           </>
         }
       />
@@ -36,30 +33,10 @@ const Aboutme = () => {
           <GlassCard className="h-full p-8 sm:p-10">
             <div className="space-y-5 text-base leading-relaxed text-zinc-600 sm:text-lg">
               <p>
-                I&apos;m{" "}
-                <span className="font-semibold text-zinc-900">Vishwam Shah</span>.
-                I build AI products that reach production and stay there. Most
-                of my work starts with a business problem rather than a model:
-                manual work eating the week, support that won&apos;t scale,
-                documents nobody has time to read.
-              </p>
-              <p>
-                I own the whole build, so you deal with one person instead of
-                stitching a model together with a frontend contractor. That has
-                meant conversational AI handling live customer channels across{" "}
-                <span className="font-medium text-zinc-900">WhatsApp and
-                Instagram</span>, voice agents running real-time interviews, and
-                vision apps that run on the phone itself with no server round
-                trip. Platforms I&apos;ve shipped have powered{" "}
-                <span className="font-medium text-zinc-900">$50K+ in
-                transactions</span> across{" "}
-                <span className="font-medium text-zinc-900">20+ client
-                projects</span>.
+                I&apos;m Bárbara, a full-stack developer with 4+ years of experience. I enjoy solving complex problems, building scalable systems and writing clean, maintainable code, and I love bringing AI and automation into real products.
               </p>
               <p className="text-zinc-500">
-                You see something running early and often, not a status update.
-                An M.Tech in Artificial Intelligence sits behind the work, but
-                what matters is that it holds up once real users are on it.
+                Outside of work, I lead a tech community for women in Rio de Janeiro and host hackathons.
               </p>
             </div>
             <div className="mt-8 flex flex-wrap items-center gap-3">

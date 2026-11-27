@@ -34,7 +34,7 @@ const ScrollProgressBar = () => {
     <div
       ref={ref}
       aria-hidden
-      className="fixed left-0 top-0 z-[60] h-[3px] w-full origin-left bg-linear-to-r from-aurora-violet via-aurora-blue to-aurora-teal"
+      className="fixed left-0 top-0 z-[60] h-[3px] w-full origin-left bg-linear-to-r from-aurora-violet via-aurora-blue to-aurora-moon"
       style={{ transform: "scaleX(0)" }}
     />
   );
