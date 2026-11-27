@@ -257,7 +257,7 @@ const Hero = () => {
             {stats.map((s) => (
               <div
                 key={s.label}
-                className="crystal crystal-light rounded-2xl px-5 py-4"
+                className="hero-stat crystal crystal-light rounded-2xl px-5 py-4"
               >
                 <StatValue prefix={s.prefix} value={s.value} suffix={s.suffix} />
                 <div className="mt-1 text-[11px] uppercase tracking-wider text-zinc-900">

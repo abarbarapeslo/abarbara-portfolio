@@ -79,7 +79,7 @@ const Contact = () => {
             {details.map((d) => {
               const content = (
                 <div className="flex items-center gap-3">
-                  <div className="grid h-11 w-11 place-items-center rounded-xl border border-line bg-white/60 text-aurora-violet">
+                  <div className="contact-detail-icon grid h-11 w-11 place-items-center rounded-xl border border-line bg-white/60 text-aurora-violet">
                     <d.Icon className="h-5 w-5" />
                   </div>
                   <div>

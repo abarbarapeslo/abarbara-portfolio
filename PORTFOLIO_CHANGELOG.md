@@ -91,6 +91,14 @@ The original supplied images remain in `public/experience/`; generated presentat
 - A máscara concentra a chuva no céu e na água, suaviza a linha das árvores e reduz a interferência sobre o texto à esquerda. A camada de chuva permanece abaixo do scrim e do conteúdo.
 - Mantida a compatibilidade com a preferência de movimento reduzido.
 
+## Tema escuro e refinamento de legibilidade — 26/11/2026
+
+- Aplicada uma prévia escura em azul-marinho/carvão, mantendo a paisagem, a chuva visual e os acentos Azul e luar.
+- Títulos de seção usam o gradiente azul e dourado; textos corridos e o resumo da NATTA na experiência ficam brancos. Os indicadores `5+` e `4+` mantêm o tratamento claro original, com texto escuro.
+- Removidos os monogramas “BP” da navegação e do rodapé; o nome Bárbara Peslo permanece.
+- Reforçada a visibilidade dos ícones de e-mail, localização e da linha do tempo “My journey” com azul claro e brilho discreto.
+- Desativado e removido o controle de áudio ambiente; a animação visual da chuva continua sem som.
+
 ## Contato por e-mail e chuva dinâmica — 26/11/2026
 
 - “Send a message” agora abre um rascunho endereçado a `lopes.barbarav@gmail.com`, com assunto e corpo preenchidos pelos campos do formulário. O link de e-mail exibido usa o mesmo endereço.

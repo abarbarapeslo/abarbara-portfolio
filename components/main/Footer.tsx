@@ -31,9 +31,6 @@ const Footer = () => {
             {/* brand + CTA */}
             <div>
               <Link href="#home" className="flex items-center gap-2">
-                <span className="grid h-10 w-10 place-items-center rounded-xl bg-linear-to-br from-zinc-600 to-zinc-800 font-display text-sm font-bold text-white shadow-soft">
-                  BP
-                </span>
                 <span className="font-display text-lg font-semibold text-fg">
                   Bárbara Peslo
                 </span>

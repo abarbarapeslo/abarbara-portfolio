@@ -31,13 +31,13 @@ const SectionHeading = ({
         className
       )}
     >
-      <h2 className="font-display text-4xl font-bold leading-[1.05] tracking-tight text-zinc-900 sm:text-5xl">
+      <h2 className="section-heading-title font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
         {title}
       </h2>
       {subtitle && (
         <p
           className={cn(
-            "max-w-2xl text-base leading-relaxed text-zinc-600",
+            "section-heading-subtitle max-w-2xl text-base leading-relaxed",
             align === "center" && "mx-auto"
           )}
         >

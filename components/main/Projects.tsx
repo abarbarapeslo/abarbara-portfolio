@@ -80,7 +80,7 @@ const Cover = ({ p }: { p: Project }) => (
   >
     {/* gradient tint shows while the image loads, and stands in when a
         project has no screenshot yet */}
-    <div className={`absolute inset-0 ${p.imageMode === "logo" ? "bg-white" : `bg-linear-to-br ${p.from} ${p.to}`}`} />
+    <div className={`absolute inset-0 ${p.imageMode === "logo" ? "project-cover-logo-bg bg-white" : `bg-linear-to-br ${p.from} ${p.to}`}`} />
     {p.image && (
       // oversized layer drifts inside the frame on scroll (ScrollEffects)
       <div data-parallax="7" className={`project-cover-art absolute inset-0 scale-[1.18]${p.imageMode === "logo" ? " project-cover-art-logo" : " project-cover-art-ambient"}`}>

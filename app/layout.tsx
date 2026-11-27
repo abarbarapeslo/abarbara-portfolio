@@ -7,7 +7,6 @@ import AuroraBackground from "@/components/main/AuroraBackground";
 import Navbar from "@/components/main/Navbar";
 import CustomCursor from "@/components/main/CustomCursor";
 import ScrollProgressBar from "@/components/ui/ScrollProgressBar";
-import AmbientSound from "@/components/ui/AmbientSound";
 import SmoothScroll from "@/components/ui/SmoothScroll";
 
 export const metadata: Metadata = {
@@ -65,7 +64,6 @@ export default function RootLayout({
         <CustomCursor />
         <AuroraBackground />
         <Navbar />
-        <AmbientSound />
         <div className="relative z-10">{children}</div>
         <Toaster theme="light" position="bottom-right" offset={84} richColors closeButton />
         <SpeedInsights />

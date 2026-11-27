@@ -95,11 +95,6 @@ const Navbar = () => {
           href="#home"
           className="ml-2 flex items-center gap-2 font-display text-sm font-bold tracking-tight text-zinc-900"
         >
-          <span
-            className="grid h-8 w-8 place-items-center rounded-full bg-linear-to-br from-zinc-600 to-zinc-800 text-[13px] text-white shadow-soft"
-          >
-            BP
-          </span>
           <span className="hidden sm:block">Bárbara Peslo</span>
         </Link>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
 
 const StarsBackground = dynamic(() => import("./StarsBackground"), {
@@ -16,6 +16,11 @@ const StarsBackground = dynamic(() => import("./StarsBackground"), {
  * Pure CSS/transform animation, no GPU/3D cost.
  */
 const AuroraBackground = () => {
+  useEffect(() => {
+    document.documentElement.setAttribute("data-dark-preview", "");
+    return () => document.documentElement.removeAttribute("data-dark-preview");
+  }, []);
+
   return (
     <div
       aria-hidden
@@ -26,13 +31,13 @@ const AuroraBackground = () => {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(125% 125% at 50% 10%, #f8fafc 38%, #e8edf1 66%, #d4dde4 100%)",
+            "radial-gradient(125% 125% at 50% 10%, #080f17 30%, #0c1a28 65%, #153b5b 100%)",
         }}
       />
 
       {/* drifting soft blobs for subtle life */}
-      <div className="absolute left-[6%] top-[-12%] h-[44vmax] w-[44vmax] animate-aurora-1 rounded-full bg-slate-400/12 blur-[130px]" />
-      <div className="absolute right-[0%] top-[6%] h-[38vmax] w-[38vmax] animate-aurora-2 rounded-full bg-slate-400/10 blur-[130px]" />
+      <div className="absolute left-[6%] top-[-12%] h-[44vmax] w-[44vmax] animate-aurora-1 rounded-full bg-[#4d91b8]/14 blur-[130px]" />
+      <div className="absolute right-[0%] top-[6%] h-[38vmax] w-[38vmax] animate-aurora-2 rounded-full bg-[#d7c77f]/8 blur-[130px]" />
 
       {/* revolving universe */}
       <div className="absolute inset-0 opacity-70">
@@ -43,7 +48,7 @@ const AuroraBackground = () => {
       <div className="absolute inset-0 bg-dots [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_72%)]" />
 
       {/* soft top spotlight (keeps content area airy, lets gradient edges show) */}
-      <div className="absolute inset-x-0 top-0 h-[40vh] bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.5),transparent_70%)]" />
+      <div className="absolute inset-x-0 top-0 h-[40vh] bg-[radial-gradient(ellipse_at_top,rgba(77,145,184,0.16),transparent_70%)]" />
     </div>
   );
 };
